@@ -1,4 +1,4 @@
-package org.example;
+package org.file_operations;
 
 
 public class Main {
@@ -16,8 +16,12 @@ public class Main {
         new FileOperations().fileFilterExample();
         new FileOperations().filePermissionsExample();
 
+        // Read Write Operations
+        new FileReadWriteExample().fileReadWrite();
+        new FileReadWriteExample().differentFileReadingExamples();
+
 //        // Delete A File and Directory
 //        new DeleteAFile().deleteAFile();
-//        new DeleteAFile().deleteDirectoryRecurrive();
+//        new DeleteAFile().deleteDirectoryRecursive();
     }
 }
