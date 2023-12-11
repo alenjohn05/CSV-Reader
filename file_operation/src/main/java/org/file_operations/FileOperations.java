@@ -1,4 +1,4 @@
-package org.example;
+package org.file_operations;
 
 import java.io.File;
 import java.io.FilenameFilter;
