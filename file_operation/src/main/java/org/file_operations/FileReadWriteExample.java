@@ -1,15 +1,9 @@
 package org.file_operations;// FileReadWriteExample.java
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class FileReadWriteExample {
@@ -97,5 +91,44 @@ public class FileReadWriteExample {
             System.err.println("Error reading with Files (Java NIO): " + e.getMessage());
         }
         System.out.println("Finished reading file with different Reading techniques........");
+    }
+
+    public void openingAFile(){
+        String filePath = "users/file.txt"; // Replace with your file path
+
+        // Reading using BufferedReader
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            System.out.println("Reading using BufferedReader:");
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the file with BufferedReader: " + e.getMessage());
+        }
+
+        // Writing using BufferedWriter
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            System.out.println("\nWriting using BufferedWriter:");
+            writer.write("Hello, writing to file!");
+            System.out.println("Content written successfully.");
+        } catch (IOException e) {
+            System.err.println("Error writing to the file with BufferedWriter: " + e.getMessage());
+        }
+
+        // RandomAccessFile for both read and write operations
+        try (RandomAccessFile file = new RandomAccessFile(filePath, "rw")) {
+            System.out.println("\nRandomAccessFile for both reading and writing:");
+            String line;
+            while ((line = file.readLine()) != null) {
+                System.out.println(line);
+            }
+            // Seek to a specific position and write content
+            file.seek(file.length());
+            file.writeBytes("\nAppending with RandomAccessFile!");
+            System.out.println("Content appended successfully.");
+        } catch (IOException e) {
+            System.err.println("Error accessing the file with RandomAccessFile: " + e.getMessage());
+        }
     }
 }

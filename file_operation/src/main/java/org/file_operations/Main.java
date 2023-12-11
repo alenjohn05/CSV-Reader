@@ -19,6 +19,7 @@ public class Main {
         // Read Write Operations
         new FileReadWriteExample().fileReadWrite();
         new FileReadWriteExample().differentFileReadingExamples();
+        new FileReadWriteExample().openingAFile();
 
 //        // Delete A File and Directory
 //        new DeleteAFile().deleteAFile();
