@@ -1,4 +1,4 @@
-package org.example;
+package org.file_operations;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class DeleteAFile {
         }
     }
 
-    public void deleteDirectoryRecurrive(){
+    public void deleteDirectoryRecursive(){
         Path directory = Path.of("tmp");
         try {
             if (!Files.exists(directory)) {
