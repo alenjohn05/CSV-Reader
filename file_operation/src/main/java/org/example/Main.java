@@ -11,6 +11,10 @@ public class Main {
         new FileOperations().getSizeofTheFile();
         new FileOperations().getFileExtension();
         new FileOperations().isFileGivenExists();
+        new FileOperations().directoryCheckExample();
+        new FileOperations().lastModifiedDateExample();
+        new FileOperations().fileFilterExample();
+        new FileOperations().filePermissionsExample();
 
 //        // Delete A File and Directory
 //        new DeleteAFile().deleteAFile();
