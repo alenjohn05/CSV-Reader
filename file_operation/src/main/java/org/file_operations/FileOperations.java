@@ -159,15 +159,12 @@ public class FileOperations {
     }
     public void filePermissionsExample(){
         String filePath = "users/sample.pdf"; // Replace with your file path
-
         Path file = Paths.get(filePath);
-
         if (Files.exists(file)) {
             // Define permissions
             Set<PosixFilePermission> permissions = new HashSet<>();
             permissions.add(PosixFilePermission.OWNER_READ);
             permissions.add(PosixFilePermission.OWNER_WRITE);
-
             // Convert permissions to FileAttribute
             try {
                 Files.setPosixFilePermissions(file, permissions);
