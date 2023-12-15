@@ -1,6 +1,10 @@
 package org.example;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.EnumSet;
 
 public class DeleteAFile {
     public void deleteAFile() {
@@ -21,6 +25,40 @@ public class DeleteAFile {
             System.out.println("SecurityException occurred: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("An unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    public void deleteDirectoryRecurrive(){
+        Path directory = Path.of("tmp");
+        try {
+            if (!Files.exists(directory)) {
+                System.out.println("Directory doesn't exist.");
+                return;
+            }
+
+            Files.walkFileTree(directory, EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+                    // Handle the case where file visit failed
+                    System.err.println("Failed to visit file: " + file.toString());
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    Files.delete(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+            System.out.println("Directory deleted successfully.");
+        } catch (IOException e) {
+            System.err.println("Failed to delete directory: " + e.getMessage());
         }
     }
 }
